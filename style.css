@@ -1,0 +1,342 @@
+/* =========================================================
+   Orbit: styles
+   1. Colours (light and dark)
+   2. Base
+   3. Header
+   4. Dashboard
+   5. Customers
+   6. Bigger screens
+   ========================================================= */
+
+/* ---------- 1. Colours ---------- */
+/* Every colour is a variable. Dark mode only changes the values. */
+:root,
+:root[data-theme="light"] {
+  --bg: #F3F5FA;
+  --card: #FFFFFF;
+  --ink: #111827;
+  --muted: #566074;
+  --line: #E2E6EF;
+  --accent: #4338CA;
+  --accent-ink: #FFFFFF;
+  --good: #0B6B45;
+  --good-bg: #DDF4E8;
+  --warn: #7A4F00;
+  --warn-bg: #FFF1CC;
+  --bad: #A5261B;
+  --bad-bg: #FDE6E3;
+  --c1: #4F46E5;
+  --c2: #0E9F9E;
+  --c3: #F59E0B;
+  --c4: #94A3B8;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0B1020;
+  --card: #131B31;
+  --ink: #E8ECF8;
+  --muted: #A5B0CC;
+  --line: #25304F;
+  --accent: #9AA1FF;
+  --accent-ink: #0B1020;
+  --good: #66DBA5;
+  --good-bg: #123A2B;
+  --warn: #F5C451;
+  --warn-bg: #3A2D0E;
+  --bad: #FF9E96;
+  --bad-bg: #402020;
+  --c1: #9AA1FF;
+  --c2: #2DD4BF;
+  --c3: #FBBF24;
+  --c4: #94A3B8;
+  color-scheme: dark;
+}
+
+/* ---------- 2. Base ---------- */
+* {
+  box-sizing: border-box;        /* padding never makes a box wider than the screen */
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+h1, h2 {
+  margin: 0;
+  line-height: 1.25;
+}
+
+h1 { font-size: 1.6rem; }
+h2 { font-size: 1.05rem; margin-bottom: 0.75rem; }
+
+a { color: var(--accent); }
+
+.sub {
+  margin: 0.25rem 0 1.25rem;
+  color: var(--muted);
+}
+
+main {
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 3rem;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- 3. Header ---------- */
+.top {
+  display: flex;
+  flex-wrap: wrap;                /* on a phone the menu moves to its own row */
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+nav {
+  display: flex;
+  gap: 0.25rem;
+  order: 3;                       /* below the brand and the button on phones */
+  width: 100%;
+}
+
+nav a {
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  color: var(--muted);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+nav a[aria-current="page"] {
+  background: var(--bg);
+  color: var(--accent);
+}
+
+#theme-btn {
+  padding: 0.5rem 0.9rem;
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ---------- 4. Dashboard ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.card,
+.box {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1rem;
+  min-width: 0;                   /* lets the content shrink instead of making the page wider */
+}
+
+.card span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.card strong {
+  font-size: 1.4rem;
+}
+
+.charts {
+  display: grid;
+  grid-template-columns: 1fr;     /* one column on phones */
+  gap: 1rem;
+}
+
+.chart {
+  position: relative;
+  height: 240px;                  /* Chart.js fills this box */
+}
+
+.box ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.box li + li {
+  margin-top: 0.4rem;
+}
+
+code {
+  background: var(--bg);
+  padding: 0.05rem 0.35rem;
+  border-radius: 5px;
+}
+
+/* ---------- 5. Customers ---------- */
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.controls label:first-child {
+  grid-column: 1 / -1;            /* the search box uses the full width on a phone */
+}
+
+.controls label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+input[type="search"],
+select {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.55rem 0.7rem;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 400;
+}
+
+#count {
+  margin: 1rem 0 0.5rem;
+}
+
+/* On a small screen only the table scrolls sideways, never the whole page */
+.table-wrap {
+  overflow-x: auto;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  white-space: nowrap;
+}
+
+th {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.num {
+  text-align: right;
+}
+
+.badge {
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.badge.active { background: var(--good-bg); color: var(--good); }
+.badge.trial { background: var(--warn-bg); color: var(--warn); }
+.badge.churned { background: var(--bad-bg); color: var(--bad); }
+
+.empty {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* ---------- 6. Bigger screens ---------- */
+/* Tablets and up: 2 chart columns and a 3-column set of search boxes */
+@media (min-width: 600px) {
+  main {
+    padding: 1.5rem 1.5rem 3rem;
+  }
+
+  .controls {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .charts {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .charts .box:first-child {
+    grid-column: 1 / -1;          /* the revenue chart uses the full width */
+  }
+
+  .chart {
+    height: 280px;
+  }
+}
+
+/* Laptops: the menu sits in the same row as the brand */
+@media (min-width: 900px) {
+  nav {
+    order: 0;
+    width: auto;
+    margin-right: auto;
+    margin-left: 1.5rem;
+  }
+
+  .controls {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* Very small phones */
+@media (max-width: 359px) {
+  .controls {
+    grid-template-columns: 1fr;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  nav a {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
